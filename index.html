@@ -171,6 +171,23 @@
             font-weight: 600;
         }
 
+        /* Music Floating Button */
+        .music-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #ffffff;
+            color: #ff4757;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
         /* Floating Hearts Animation */
         .floating-heart {
             position: absolute;
@@ -198,6 +215,14 @@
     </style>
 </head>
 <body onclick="createHeart(event)">
+
+    <!-- Music Toggle Button -->
+    <button class="music-btn" onclick="toggleMusic(event)" id="m-btn">🎵 Play Music</button>
+
+    <!-- Background Music Tag -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mp3">
+    </audio>
 
     <div class="card">
         <div class="title">✨ Happy Birthday ✨</div>
@@ -240,11 +265,30 @@
 
     <script>
         let currentStep = 1;
+        const audio = document.getElementById("bg-music");
+        const mBtn = document.getElementById("m-btn");
+
+        // Toggle Music Function
+        function toggleMusic(e) {
+            e.stopPropagation();
+            if (audio.paused) {
+                audio.play();
+                mBtn.innerText = "⏸️ Pause Music";
+            } else {
+                audio.pause();
+                mBtn.innerText = "🎵 Play Music";
+            }
+        }
 
         function startQuiz(e) {
             e.stopPropagation();
             document.getElementById("main-btn").style.display = "none";
             document.getElementById("quiz-box").style.display = "block";
+            
+            // Play Audio on First Interaction
+            audio.play().then(() => {
+                mBtn.innerText = "⏸️ Pause Music";
+            }).catch(err => console.log("Audio play failed:", err));
         }
 
         function checkAnswer(option, e) {
@@ -258,6 +302,11 @@
                 document.getElementById("quiz-box").style.display = "none";
                 var surpriseDiv = document.getElementById("surprise-section");
                 surpriseDiv.style.display = "block";
+
+                // Play Audio if not played yet
+                audio.play().then(() => {
+                    mBtn.innerText = "⏸️ Pause Music";
+                }).catch(() => {});
 
                 // Confetti Burst
                 confetti({
