@@ -62,7 +62,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top;
+            object-position: center;
         }
 
         .message-box {
@@ -157,7 +157,7 @@
             height: 110px;
             border-radius: 12px;
             object-fit: cover;
-            object-position: top;
+            object-position: center;
             border: 2px solid #ffffff;
         }
 
@@ -169,6 +169,7 @@
             font-size: 13px;
             line-height: 1.5;
             font-weight: 600;
+            margin-bottom: 15px;
         }
 
         /* Music Floating Button */
@@ -212,6 +213,13 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+      
+        /* Special fix only for the middle portrait image */
+        .grid-img-special {
+            object-fit: cover;
+            object-position: top center; /* Ye alignment face ko frame me layega */
+        }
+
     </style>
 </head>
 <body onclick="createHeart(event)">
@@ -233,7 +241,7 @@
 
         <div class="message-box">
             <h3 style="color: #ff4757; margin-bottom: 5px;">To My Dearest Sister 💕</h3>
-            <p>Aap meri life ki sabse special person ho! Wish you the happiest birthday ever! ✨</p>
+            <p>Tum meri life ki sabse special person ho! Wish you the happiest birthday ever! ✨</p>
         </div>
 
         <button id="main-btn" class="btn-surprise" onclick="startQuiz(event)">Tap for Surprise 🎉</button>
@@ -252,13 +260,17 @@
             
             <div class="photo-grid">
                 <img src="pic1.jpg" alt="Memory 1" class="grid-img">
-                <img src="pic2.jpg" alt="Memory 2" class="grid-img">
+                <!-- Main change: 'grid-img-special' class add ki -->
+                <img src="pic2.jpg" alt="Memory 2" class="grid-img grid-img-special">
                 <img src="pic3.jpg" alt="Memory 3" class="grid-img">
             </div>
 
             <div class="heart-lines">
                 "Ek pyari si behen, jo meri sabse achhi dost bhi hai! 💕<br>
-                Aapki smile hamesha aise hi chamakti rahe, aur aapki har khwahish puri ho. Thank you for being the best sister in the world! 🌸✨"
+                Tumhari smile hamesha aise hi chamakti rahe, aur tumhari har khwahish puri ho. Thank you for being the best sister in the world! 🌸✨"
+            </div>
+            <div class="heart-lines">
+                ​"Bhagwan kare tumhari life khushiyon se bhar jaye aur tum apne saare sapne pure karo.👑✨"
             </div>
         </div>
     </div>
